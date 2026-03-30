@@ -2,7 +2,8 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import { createServer } from "node:http";
-
+import dotenv from "dotenv";
+dotenv.config();
 
 import connectToSocket from "./controller/socketManager.js";
 import userRoutes from "./routes/user.routes.js"
@@ -22,7 +23,7 @@ const start=async ()=>{
     server.listen(app.get("port"),()=>{
         console.log(`Server running on port ${app.get("port")}`);
     })
-    const connectionDb= await mongoose.connect("mongodb+srv://appelVideo:appelVideo@cluster0.xayrybc.mongodb.net/?appName=Cluster0")
+    const connectionDb = await mongoose.connect(process.env.MONGO_URI);
     console.log("MongoDB connected successfully");
 
     }
